@@ -1,6 +1,6 @@
 import { APIRequestContext, expect } from '@playwright/test';
 export async function divideNumber(request: APIRequestContext, A: number, B: number) {
-    const divide = A * B;
+    const divide = A/B;
     const body = `<?xml version="1.0" encoding="utf-8"?>
     <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
