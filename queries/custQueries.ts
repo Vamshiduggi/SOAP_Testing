@@ -1,29 +1,27 @@
 export const queries = {
     insert: `
-        INSERT INTO Student(id, name, mobile, email)
+        INSERT INTO Customer(id, name, mobile, email)
         VALUES (?, ?, ?, ?)
     `,
-
     getAll: `
-        SELECT * FROM Student
+        SELECT * FROM Customer
     `,
-
     getById: `
-        SELECT * FROM Student
+        SELECT * FROM Customer
         WHERE id = ?
     `,
-
     update: `
-        UPDATE Student
+        UPDATE Customer
         SET email = ?
         WHERE id = ?
     `,
-
     delete: `
-        DELETE FROM Student
+        DELETE FROM Customer
         WHERE id = ?
     `,
-    createTable: `CREATE TABLE IF NOT EXISTS Student(
+    deleteAll:`DELETE FROM Customer`,
+
+    createTable: `CREATE TABLE IF NOT EXISTS Customer(
                     id INTEGER PRIMARY KEY,
                     name TEXT,
                     mobile NUMBER,
@@ -31,5 +29,5 @@ export const queries = {
                 )
     `,
     getTable: `SELECT name FROM sqlite_master
-             WHERE type='table' AND name='Student'`
+             WHERE type='table' AND name='Customer'`
 };

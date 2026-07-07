@@ -93,31 +93,26 @@ test("Fetch Record", async () => {
     });
     console.log("Record fetched successfully.");
     expect(row.name).toBe(students[1].name);
-    // expect(row.mobile).toBe(students[1].mobile);
 });
 
 // Fetch all records
 test('Fetch all records', async () => {
-
     db.all(queries.getAll, (err, rows) => {
-
         if (err) {
             console.error(err.message);
         } else {
             console.table(rows);
         }
-
     });
     console.log("All records fetched successfully.");
-
 });
 
 // Update Record
-test("Update Record", async () => {
+test("Update and verify Record", async () => {
     await new Promise<void>((resolve, reject) => {
         db.run(
             queries.update,
-            [students[1].id],
+            ['rakesh123@gmail.com',students[17].id],
             (err) => {
                 if (err)
                     reject(err);
@@ -127,14 +122,10 @@ test("Update Record", async () => {
         );
         console.log("Record updated successfully.");
     });
-});
-
-// Verify Update
-test("Verify Updated Record", async () => {
     const row: any = await new Promise((resolve, reject) => {
         db.get(
-            queries.update,
-            [students[1].id],
+            queries.getById,
+            [students[17].id],
             (err, row) => {
                 if (err)
                     reject(err);
@@ -143,16 +134,15 @@ test("Verify Updated Record", async () => {
             }
         );
     });
-    expect(row.salary).toBe(60000);
+    expect(row.email).toBe("rakesh123@gmail.com");
 });
 
-
 // Delete Record
-test("Delete Record", async () => {
+test("Delete and verify Record", async () => {
     await new Promise<void>((resolve, reject) => {
         db.run(
             queries.delete,
-            [students[20].id],
+            [students[19].id],
             (err) => {
                 if (err)
                     reject(err);
@@ -162,15 +152,10 @@ test("Delete Record", async () => {
         );
         console.log("Record deleted successfully.");
     });
-});
-
-
-// Verify Delete
-test("Verify Delete", async () => {
     const row = await new Promise((resolve, reject) => {
         db.get(
-            queries.delete,
-            [students[0].id],
+            queries.getById,
+            [students[19].id],
             (err, row) => {
                 if (err)
                     reject(err);
@@ -181,4 +166,7 @@ test("Verify Delete", async () => {
     });
     expect(row).toBeUndefined();
 });
+
+
+
 
